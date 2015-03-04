@@ -5,7 +5,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
+<style>
+html,div{
+margin:0px;
+padding:0px;
+width:100%;
+}
+.heading{
+	top:0px;
+	left:0px;
+	background-color: #4d4d4d;
+	color:red;
+	width:100%;
+	height:100px;
+	text-align: center;
+	font-size: xx-large;
+	margin-bottom:125px;	
+}
+.formdiv{
+	width:30%;
+	margin-left:35%;
+	margin-right:35%;
+	background: #4d4d4d;
+	padding-bottom:30px;
+	
+}
+.bottom{
+	bottom: 0px;
+}
+input{
+	width:60%;
+	margin-left:20%;
+	margin-right:20%;
+	height:40px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+</style>
 </head>
 <body>
 <div class="heading"><b><span style="height:100%; padding-bottom:20px;">GLORY CHEMICALS</span> </b></div>
