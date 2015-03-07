@@ -44,7 +44,27 @@
 }
 </style>
 <script type="text/javascript">
-	
+	function del(id) {
+		// alert(id);
+
+		if (confirm("Are you sure you want to delete?") == true) {
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+
+			xmlhttp.onreadystatechange = function() {
+
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				}
+			};
+			xmlhttp.open("GET", "delstock.jsp?delete_id=" + id, true);
+
+			xmlhttp.send();
+		}
+	}
 </script>
 <script type="text/javascript">
 	function orderdetail(id) {		
