@@ -7,14 +7,14 @@
 		Statement st = connjdbc.getDatacn();
 		ResultSet rs = null;
 		String edit = request.getParameter("edit_id");
-		String dispatchdate = null, companyname = null, billto = null, shipto = null, invoice = null, shipped_by = null, tracking = null;
+		String dispatchdate = null, ordernumber = null,companyname = null, billto = null, shipto = null, invoice = null, shipped_by = null, tracking = null;
 		int sales_id = 0;
 		int check = 0;
 		int editid = 0;
 		if (edit != null) {
 			editid = Integer.parseInt(edit);
 			session.setAttribute("editid", editid);
-			rs = st.executeQuery("SELECT a.sales_id,a.dispatch_date,b.company_name,c.company_name,a.ship_to,a.invoice,a.shipped_by,a.tracking FROM sales_info a INNER JOIN cust_info b ON a.bill_to = b.cust_id INNER JOIN cust_info c ON a.ship_to = c.cust_id where a.sales_id="
+			rs = st.executeQuery("SELECT a.sales_id,a.dispatch_date,b.company_name,c.company_name,a.ship_to,a.invoice,a.shipped_by,a.tracking,a.ordernumber FROM sales_info a INNER JOIN cust_info b ON a.bill_to = b.cust_id INNER JOIN cust_info c ON a.ship_to = c.cust_id where a.sales_id="
 					+ editid);
 			if (rs.next()) {
 				sales_id = rs.getInt(1);
@@ -24,6 +24,7 @@
 				invoice = rs.getString(6);
 				shipped_by = rs.getString(7);
 				tracking = rs.getString(8);
+				ordernumber = rs.getString(9);
 			}
 			check = 5;
 		}
@@ -97,22 +98,32 @@
 									<td><select name="billto">
 											<option value="-1">Select Company Name</option>
 											<%
-												rs = st.executeQuery("SELECT * FROM cust_info ");
+												rs = st.executeQuery("SELECT * FROM cust_info ORDER BY company_name");
 													while (rs.next()) {
 											%>
-											<option <% if(check > 0){if(rs.getString(2).equals(billto))out.println("selected");}%> value="<%=rs.getInt(1)%>"><%=rs.getString(2)%></option>
+											<option
+												<%if (check > 0) {
+						if (rs.getString(2).equals(billto))
+							out.println("selected");
+					}%>
+												value="<%=rs.getInt(1)%>"><%=rs.getString(2)%></option>
 											<%
 												}
 											%>
 									</select></td>
-									<td><label>Ship To:</label></td>									
+									<td><label>Ship To:</label></td>
 									<td><select name="shipto">
 											<option value="-1">Select Company Name</option>
 											<%
-												rs = st.executeQuery("SELECT * FROM cust_info ");
+												rs = st.executeQuery("SELECT * FROM cust_info ORDER BY company_name");
 													while (rs.next()) {
 											%>
-											<option <% if(check > 0){if(rs.getString(2).equals(shipto))out.println("selected");}%> value="<%=rs.getInt(1)%>"><%=rs.getString(2)%></option>
+											<option
+												<%if (check > 0) {
+						if (rs.getString(2).equals(shipto))
+							out.println("selected");
+					}%>
+												value="<%=rs.getInt(1)%>"><%=rs.getString(2)%></option>
 											<%
 												}
 											%>
@@ -120,7 +131,8 @@
 								</tr>
 								<tr>
 									<td><label>Invoice#:</label></td>
-									<td><input name="invoice" value="<%=check > 0 ? invoice : ""%>"
+									<td><input name="invoice"
+										value="<%=check > 0 ? invoice : ""%>"
 										placeholder="Enter Invoice" /></td>
 									<td><label>Shipped By:</label></td>
 									<td><input name="shipby"
@@ -128,6 +140,10 @@
 										placeholder="Enter shipping company" /></td>
 								</tr>
 								<tr>
+									<td><label>Order Number:</label></td>
+									<td><input name="ordernumber"
+										value="<%=check > 0 ? ordernumber : ""%>"
+										placeholder="Enter Order Number" /></td>
 
 									<td colspan="2"></td>
 								</tr>
