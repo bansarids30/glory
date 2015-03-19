@@ -14,6 +14,7 @@
 	String phone1 = request.getParameter("phone1");
 	String phone2 = request.getParameter("phone2");
 	String email = request.getParameter("email");
+	String attendant_name = request.getParameter("attendant");
 	String submittype = request.getParameter("submit"); 
 	Statement st = connjdbc.getDatacn();
 	session.setAttribute("custadd","");
@@ -22,8 +23,8 @@
 	try {
 		if(submittype.equals("Add")){
 			int i = 0;
-			String str = "INSERT INTO cust_info(company_name,address1,address2,city,state,zipcode,country,phone1,phone2,email) VALUES('"
-					+ company + "','"+address1+"','"+address2+"','"+city+"','"+state+"','"+zipcode+"','"+country+"','"+phone1+"','"+phone2+"','"+email+"')";	
+			String str = "INSERT INTO cust_info(company_name,address1,address2,city,state,zipcode,country,phone1,phone2,email,attendant_name) VALUES('"
+					+ company + "','"+address1+"','"+address2+"','"+city+"','"+state+"','"+zipcode+"','"+country+"','"+phone1+"','"+phone2+"','"+email+"','"+attendant_name+"')";	
 			i = st.executeUpdate(str);
 			if (i > 0) {
 				session.setAttribute("custadd", "Successfully Added!");
@@ -36,7 +37,7 @@
 			int i  = 0;
 			String s = session.getAttribute("editid")+"";
 			int id = Integer.parseInt(s);
-			String str = "UPDATE cust_info SET company_name='"+company+"',address1='"+address1+"',address2='"+address2+"',city='"+city+"',state='"+state+"',zipcode='"+zipcode+"',country='"+country+"',phone1='"+phone1+"',phone2='"+phone2+"',email='"+email+"' WHERE cust_id="+id;
+			String str = "UPDATE cust_info SET company_name='"+company+"',address1='"+address1+"',address2='"+address2+"',city='"+city+"',state='"+state+"',zipcode='"+zipcode+"',country='"+country+"',attendant_name='"+attendant_name+"',phone1='"+phone1+"',phone2='"+phone2+"',email='"+email+"' WHERE cust_id="+id;
 			i = st.executeUpdate(str);
 			if(i > 0){
 				session.setAttribute("custupdate", "Successfully Updated!");

@@ -166,7 +166,7 @@
 										placeholder="Enter Country"></td>
 								</tr>
 								<tr>
-									<td><label>Attendant Name:</label></td>
+									<td><label>Contact Person Name:</label></td>
 									<td><input name="attendant"
 										value="<%=check > 0 ? attendant : ""%>"
 										placeholder="Enter Attendant"></td>
@@ -204,7 +204,7 @@
 					<div class="col-md-12">
 						<!-- Advanced Tables -->
 						<div class="panel panel-default">
-							<div class="panel-heading">Current Stocks</div>
+							<div class="panel-heading">Customer Details</div>
 							<div class="panel-body">
 								<div class="table-responsive">
 									<table class="table table-striped table-bordered table-hover"
@@ -213,15 +213,9 @@
 											<tr>
 												<th>Sr No</th>
 												<th>Company Name</th>
-												<th>Address Line 1</th>
-												<th>Address Line 2</th>
-												<th>City</th>
-												<th>State</th>
-												<th>Zipcode</th>
-												<th>Country</th>
-												<th>Attendant Name</th>
+												<th>Address</th>
+												<th>Contact Person</th>
 												<th>Phone</th>
-												<th>Alternate Phone</th>
 												<th>Email</th>
 												<th>Edit</th>
 											</tr>
@@ -230,21 +224,15 @@
 										<tbody>
 											<%
 												int i = 0;
-													rs = st.executeQuery("SELECT * FROM cust_info");
+													rs = st.executeQuery("SELECT * FROM cust_info ORDER BY company_name");
 													while (rs.next()) {
 											%>
 											<tr>
 												<td><%=++i%></td>
 												<td><%=rs.getString(2)%></td>
-												<td><%=rs.getString(3)%></td>
-												<td><%=rs.getString(4)%></td>
-												<td><%=rs.getString(5)%></td>
-												<td><%=rs.getString(6)%></td>
-												<td><%=rs.getString(7)%></td>
-												<td><%=rs.getString(8)%></td>
+												<td><%=rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7)+" "+rs.getString(8)%></td>
 												<td><%=rs.getString(9)%></td>
 												<td><%=rs.getString(10)%></td>
-												<td><%=rs.getString(11)%></td>
 												<td><%=rs.getString(12)%></td>
 												<td>
 													<%
