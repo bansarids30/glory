@@ -18,6 +18,9 @@
         	if(rs.getString(3).equals(password)){
         		session.setAttribute("username", username);
         		response.sendRedirect("totalsales.jsp");
+        	}else{
+        		session.setAttribute("loginerror","Wrong Username & Password!");
+            	response.sendRedirect("login.jsp");
         	}
         }else{
         	session.setAttribute("loginerror","Wrong Username & Password!");

@@ -132,16 +132,18 @@
 												<th>Invoice#</th>
 												<th>Shipped_by</th>
 												<th>Tracking#</th>
+												<th>Order Number</th>
 												<th>View Details</th>
 												<th>Edit</th>
 												<th>Print</th>
+												
 											</tr>
 										</thead>
 
 										<tbody>
 											<%
 												ResultSet rs = st
-															.executeQuery("SELECT a.sales_id,a.dispatch_date,b.company_name,c.company_name,a.invoice,a.shipped_by,a.tracking FROM sales_info a INNER JOIN cust_info b ON a.bill_to = b.cust_id INNER JOIN cust_info c ON a.ship_to = c.cust_id");
+															.executeQuery("SELECT a.sales_id,a.dispatch_date,b.company_name,c.company_name,a.invoice,a.shipped_by,a.tracking,a.ordernumber FROM sales_info a INNER JOIN cust_info b ON a.bill_to = b.cust_id INNER JOIN cust_info c ON a.ship_to = c.cust_id");
 													int i = 0;
 													while (rs.next()) {
 											%>
@@ -153,7 +155,8 @@
 												<td><%=rs.getString(5)%></td>
 												<td><%=rs.getString(6)%></td>
 												<td><%=rs.getString(7)%></td>
-												<td><button onClick="orderdetail(<%=rs.getInt(1)%>);"
+												<td><%=rs.getString(8)%></td>
+												<td><button onclick="orderdetail(<%=rs.getInt(1)%>);"
 														class="btn btn-info">Order Details</button></td>
 												<td>
 													<%
