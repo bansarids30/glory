@@ -1,0 +1,2 @@
+# glory
+inventory management software
